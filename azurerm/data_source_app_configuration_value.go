@@ -50,11 +50,6 @@ func dataSourceArmAppConfigurationValue() *schema.Resource {
 				Computed: true,
 			},
 
-			"last_modified": {
-				Type:     schema.TypeString,
-				Computed: true,
-			},
-
 			"tags": tags.SchemaDataSource(),
 		},
 	}
@@ -92,7 +87,6 @@ func dataSourceArmAppConfigurationValueRead(d *schema.ResourceData, meta interfa
 	d.SetId(*resp.ETag)
 	d.Set("value", resp.Value)
 	d.Set("content_type", resp.ContentType)
-	d.Set("last_modified", resp.LastModified.Format(time.RFC3339))
 
 	return tags.FlattenAndSet(d, resp.Tags)
 }
